@@ -92,7 +92,7 @@ CMD ["./main"]
 
 ### Step 5. Monitoring with prometheus and grafana
 
-!(monitoring_with_prometheus_grafana)[]
+!(monitoring_with_prometheus_grafana)[https://github.com/pulkit-dheer/Go-Web-Applications-with-ArgoCD-Helm-and-EKS/blob/main/static/images/monitoring.png]
 
 ### Result Interpretation
 
