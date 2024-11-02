@@ -6,7 +6,11 @@ The goal of this project is to design and implement a scalable Go web applicatio
 
 ### 2. **Project Structure**
 
-- **Source Code**: `app/`
+
+![project-structure.png](https://github.com/pulkit-dheer/Go-Web-Applications-with-ArgoCD-Helm-and-EKS/blob/main/static/images/project-structure.png)
+
+
+- **Source Code**: `static/`
     - Contains the Go web application codebase.
 - **Docker Configuration**: `Dockerfile`
     - Dockerfile to build a Docker image of the Go app.
@@ -27,6 +31,33 @@ The goal of this project is to design and implement a scalable Go web applicatio
 
 ### Step 1: **Dockerize the Go Application**
 
+```bash
+FROM golang:1.22.5 AS base
+
+WORKDIR /app
+
+COPY go.mod .
+
+RUN go mod download
+
+COPY . .
+
+RUN go build -o main
+
+# FINAL STAGE (Distroless Image)
+
+FROM gcr.io/distroless/base 
+
+COPY --from=base /app/main .
+
+COPY --from=base /app/static/ ./static
+
+EXPOSE 8080
+
+CMD ["./main"]
+```
+
+
 - Create a Dockerfile for the Go application to define the image build process.
     ```bash
     docker build -t my-go-app .
@@ -38,6 +69,9 @@ The goal of this project is to design and implement a scalable Go web applicatio
 
 ### Step 2: **Set Up CI/CD Pipeline**
 
+![cicd_stages.png](https://github.com/pulkit-dheer/Go-Web-Applications-with-ArgoCD-Helm-and-EKS/blob/main/static/images/cicd_stages.png)
+
+
 - Use GitHub Actions (or another CI/CD platform) to automate the following tasks:
     - **Build**: Build Docker image from source.
     - **Test**: Run application tests to ensure functionality.
@@ -46,10 +80,19 @@ The goal of this project is to design and implement a scalable Go web applicatio
 
 ### Step 3: **Deploy on EKS with Helm and Argo CD**
 
+![deployement_file.png](https://github.com/pulkit-dheer/Go-Web-Applications-with-ArgoCD-Helm-and-EKS/blob/main/static/images/deployement_file.png)
+
 - **Helm**:
     Create a Helm chart that defines Kubernetes manifests for deployment, services, config maps, and other resources.
 
+
+### Step 4: **Argo CD**
+
+![argocd_deployment.png](https://github.com/pulkit-dheer/Go-Web-Applications-with-ArgoCD-Helm-and-EKS/blob/main/static/images/argocd_deployment.png)
+
 ### Result Interpretation
+
+![about_page.png](https://github.com/pulkit-dheer/Go-Web-Applications-with-ArgoCD-Helm-and-EKS/blob/main/static/images/about_page.png)
 
 - **Successful Image Build**: The successful build indicates that the Dockerfile and Go application are correctly set up. If there are issues, Docker will provide error messages to help us troubleshoot problems with your code or configuration.
 - **Running Application**: The ability to run the container without errors suggests that our application is correctly configured to handle requests. If we encounter errors during runtime, these may stem from application logic issues or misconfigured environment settings.
