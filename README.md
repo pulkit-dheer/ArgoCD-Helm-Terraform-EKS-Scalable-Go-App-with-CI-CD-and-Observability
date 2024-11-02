@@ -27,7 +27,6 @@ The goal of this project is to design and implement a scalable Go web applicatio
 - **Orchestration**: Kubernetes (EKS)
 - **Deployment Management**: Helm and Argo CD
 
-### 4. **Steps to Build and Deploy**
 
 ### 🐳 Step 1: **Dockerize the Go Application**
 
@@ -89,6 +88,11 @@ CMD ["./main"]
 ### Step 4: **Argo CD**
 
 ![argocd_deployment.png](https://github.com/pulkit-dheer/Go-Web-Applications-with-ArgoCD-Helm-and-EKS/blob/main/static/images/argocd_deployment.png)
+
+
+### Step 5. Monitoring with prometheus and grafana
+
+!(monitoring_with_prometheus_grafana)[]
 
 ### Result Interpretation
 
