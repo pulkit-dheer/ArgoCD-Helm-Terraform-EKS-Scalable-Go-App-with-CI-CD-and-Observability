@@ -1,4 +1,4 @@
-## Project Overview: Go Web Application with CI/CD, Helm, and EKS
+## ArgoCD, Helm, Terraform, EKS: Scalable Go App with CI/CD and Observability
 
 ### 🎯 1. **Objective**
 
